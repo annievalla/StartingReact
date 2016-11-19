@@ -3,19 +3,23 @@ import React, { Component } from 'react';
 class SearchBar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      inputValue: ''
-    };
-
+    this.state = {term: ''};
     this.onInputChange = this.onInputChange.bind(this);
   }
 
-  onInputChange(e) {
-    this.setState({inputValue: e.target.value.toUpperCase()});
+  onInputChange(term) {
+    this.setState({term});
+    this.props.onSearchTermChange(term);
   }
 
   render() {
-    return <input value={this.state.inputValue} onChange={this.onInputChange} />;
+    return (
+      <div className="search-bar">
+        <input
+          value={this.state.term}
+          onChange={e => this.onInputChange(e.target.value)} />
+      </div>
+    );
   }
 }
 
